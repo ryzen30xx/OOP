@@ -1,6 +1,6 @@
 from shape import Shape
-from retangle import Retangle
+from retangle import Rectangle
 
-r = Retangle('R1', 3, 4)
+r = Rectangle('R1', 3, 4)
 
 print(r)

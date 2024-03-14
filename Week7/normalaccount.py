@@ -9,10 +9,10 @@ class NormalAccount(Account):
 			print('Amount must be greater than 0');
 
 		if amount > self.balance:
-			print('Insufficient balance')
+			print('Insufficient balance');
 			return
 		self._balance -= amount
-		print(f'Widthdrawal successful. Current balance: {self.balance}')
+		print(f'Widthdrawal successful. Current balance: {self.balance}');
 
 
 	def __Str__(self):

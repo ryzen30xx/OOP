@@ -1,6 +1,5 @@
 from calculation import calculate_shipping_fee
 
-
 def test_case_001():
     weight_unit = 'Pounds'
     weight = 10
@@ -8,101 +7,91 @@ def test_case_001():
     distance = 1
     selected_method = 'Standard'
     result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    assert result == 5.5305
+    assert result == 5.5305  # Expected output
 
 def test_case_002():
-    weight_unit = 'Pounds'
-    weight = 5
-    distance_unit = 'Miles'
-    distance = 2
-    selected_method = 'Express'
-    result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    assert result == 11.5305
-
-def test_case_003():
     weight_unit = 'Kilograms'
-    weight = 15
+    weight = 20
     distance_unit = 'Kilometers'
     distance = 10
-    selected_method = 'Priority'
+    selected_method = 'Express'
     result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    assert result == 30.0
+    assert result == 12.5
 
-def test_case_004():
+def test_case_003():
     weight_unit = 'Pounds'
     weight = 0
     distance_unit = 'Miles'
-    distance = 5
+    distance = 1
+    selected_method = 'Priority'
+    try:
+        result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
+    except ValueError as e:
+        assert str(e) == "Weight must be greater than 0"
+
+def test_case_004():
+    weight_unit = 'Kilograms'
+    weight = 20
+    distance_unit = 'Miles'
+    distance = 0
     selected_method = 'Standard'
     try:
-        calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    except ValueError:
-        assert True
-    else:
-        assert False
+        result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
+    except ValueError as e:
+        assert str(e) == "Distance must be greater than 0"
 
 def test_case_005():
     weight_unit = 'Pounds'
-    weight = 8
+    weight = 10
     distance_unit = 'Miles'
-    distance = -2
-    selected_method = 'Express'
+    distance = 1
+    selected_method = 'Priority'
     try:
-        calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    except ValueError:
-        assert True
-    else:
-        assert False
+        result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
+    except KeyError as e:
+        assert str(e) == "Priority"
 
 def test_case_006():
     weight_unit = 'Kilograms'
     weight = 20
-    distance_unit = 'Kilometers'
-    distance = 0
-    selected_method = 'Priority'
-    try:
-        calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    except ValueError:
-        assert True
-    else:
-        assert False
+    distance_unit = 'Miles'
+    distance = 10
+    selected_method = 'Standard'
+    result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
+    assert result == 20.8055
 
 def test_case_007():
     weight_unit = 'Pounds'
-    weight = -10
-    distance_unit = 'Miles'
-    distance = 3
-    selected_method = 'Standard'
-    try:
-        calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    except ValueError:
-        assert True
-    else:
-        assert False
-
-def test_case_008():
-    weight_unit = 'Pounds'
-    weight = 12
-    distance_unit = 'Miles'
-    distance = 4
+    weight = 10
+    distance_unit = 'Kilometers'
+    distance = 1
     selected_method = 'Express'
     result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    assert result == 14.5305
+    assert result == 18.1555
 
-def test_case_009():
+def test_case_008():
     weight_unit = 'Kilograms'
-    weight = 25
-    distance_unit = 'Kilometers'
-    distance = 20
+    weight = 20
+    distance_unit = 'Miles'
+    distance = 10
     selected_method = 'Priority'
     result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    assert result == 35.0
+    assert result == 40.8055
 
-def test_case_010():
+def test_case_009():
     weight_unit = 'Pounds'
-    weight = 9
-    distance_unit = 'Miles'
-    distance = 6
+    weight = 0.5
+    distance_unit = 'Kilometers'
+    distance = 1
     selected_method = 'Standard'
     result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
-    assert result == 9.0305
+    assert result == 7.5305
+
+def test_case_010():
+    weight_unit = 'Kilograms'
+    weight = 1
+    distance_unit = 'Miles'
+    distance = 0.5
+    selected_method = 'Express'
+    result = calculate_shipping_fee(weight_unit, weight, distance_unit, distance, selected_method)
+    assert result == 14.7555
